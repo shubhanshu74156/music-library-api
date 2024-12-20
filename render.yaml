@@ -3,6 +3,10 @@ services:
   - type: web
     name: music-library-api
     runtime: node
-    plan: free # or your chosen plan
-    buildCommand: npm install && npm run build # Adjust if you have a build step
+    plan: free 
+    buildCommand: |
+      npm install
+      npm run build
     startCommand: npm start
+    preDeployCommand: |
+      npx sequelize-cli db:migrate 
