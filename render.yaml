@@ -7,6 +7,4 @@ services:
     buildCommand: |
       npm install
       npm run build
-    startCommand: npm start
-    preDeployCommand: |
-      npx sequelize-cli db:migrate 
+    startCommand: npm run migrate && npm start
