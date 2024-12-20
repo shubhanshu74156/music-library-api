@@ -4,10 +4,7 @@ const responseHelper = require('../utils/responseHelper');
 const bcrypt = require('bcrypt');
 
 const getUsers = async (req, res) => {
-    if (req.user.role !== Roles.ADMIN) {
-        return res.status(401).json(responseHelper.generateResponse(401, null, "Unauthorized Access", null));
-    }
-
+    
     const limit = parseInt(req.query.limit) || 5; 
     const offset = parseInt(req.query.offset) || 0; 
     const role = req.query.role;
@@ -43,10 +40,7 @@ const getUsers = async (req, res) => {
 };
 
 const addUser = async (req, res) => {
-    if (req.user.role !== Roles.ADMIN) {
-        return res.status(403).json(responseHelper.generateResponse(403, null, "Forbidden Access/Operation not allowed.", null));
-    }
-
+    
     const { email, password, role } = req.body;
 
     if (!email || !password || !role) {
@@ -87,9 +81,6 @@ const addUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-    if (req.user.role !== Roles.ADMIN) {
-        return res.status(403).json(responseHelper.generateResponse(403, null, "Forbidden Access/Operation not allowed.", null));
-    }
 
     const userId = req.params.user_id; 
 
